@@ -1,0 +1,20 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "Application Submitted";
+}
+
+@model Mission04_JoelsMovies.Models.ApplicationResponse
+
+<h1 style="font-style:italic;">Movie Successfully Added</h1>
+<br />
+
+<h3>@Model.Title</h3>
+<h5>@Model.Year, @Model.Category, @Model.Rating, Directed by @Model.Director</h5>
+
+<br />
+
+<h5>Edited: @Model.Edited</h5>
+<h5>Lent to: @Model.Lent_to</h5>
+<h5>Notes: @Model.Notes</h5>
