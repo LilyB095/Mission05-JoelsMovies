@@ -11,16 +11,22 @@ namespace Mission04_JoelsMovies.Models
         [Key]
         [Required]
         public int MovieId { get; set; }
+
+
         //These fields are all required
-        [Required]
+        [Required(ErrorMessage ="Please select movie category")]
         public string Category { get; set; } 
-        [Required]
+
+        [Required(ErrorMessage = "Please input movie title")]
         public string Title { get; set; }
-        [Required]
+
+        [Required(ErrorMessage = "Please input movie year")]
         public string Year { get; set; } 
-        [Required]
+
+        [Required(ErrorMessage = "Please input movie director")]
         public string Director { get; set; } 
-        [Required]
+
+        [Required(ErrorMessage = "Please select movie rating")]
         public string Rating { get; set; } //dropdown G, PG, PG-13, R
 
         // These fields are optional
