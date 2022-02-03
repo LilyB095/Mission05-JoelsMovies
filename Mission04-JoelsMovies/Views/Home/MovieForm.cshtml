@@ -11,14 +11,23 @@
     <h1 class="display-4">Enter a Movie:</h1>
     <br />
     <br />
-
+    
     <div>
         <form method="post">
+            <div asp-validation-summary="All"></div>
+
             <p style="font-style:italic;">Required</p>
-            <label asp-for="Category">*Category:</label>
-            <input asp-for="Category" />
+
+            <label asp-for="CategoryID">*Category:</label>
+            <select asp-for="CategoryID">
+                @foreach (Category c in ViewBag.myCategories)
+                {
+                    <option value="@c.CategoryID">@c.CategoryName</option>
+                }
+
+            </select>
             <br />
-            
+
             <label asp-for="Title">*Title:</label>
             <input asp-for="Title" />
             <br />

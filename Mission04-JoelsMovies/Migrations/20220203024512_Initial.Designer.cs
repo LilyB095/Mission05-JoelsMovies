@@ -8,7 +8,7 @@ using Mission04_JoelsMovies.Models;
 namespace Mission04_JoelsMovies.Migrations
 {
     [DbContext(typeof(MovieContext))]
-    [Migration("20220203004620_Initial")]
+    [Migration("20220203024512_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -108,7 +108,7 @@ namespace Mission04_JoelsMovies.Migrations
 
                     b.HasKey("CategoryID");
 
-                    b.ToTable("Category");
+                    b.ToTable("Categories");
 
                     b.HasData(
                         new

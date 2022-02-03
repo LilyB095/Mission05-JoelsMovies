@@ -7,7 +7,7 @@ namespace Mission04_JoelsMovies.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Category",
+                name: "Categories",
                 columns: table => new
                 {
                     CategoryID = table.Column<int>(nullable: false)
@@ -16,7 +16,7 @@ namespace Mission04_JoelsMovies.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Category", x => x.CategoryID);
+                    table.PrimaryKey("PK_Categories", x => x.CategoryID);
                 });
 
             migrationBuilder.CreateTable(
@@ -38,20 +38,20 @@ namespace Mission04_JoelsMovies.Migrations
                 {
                     table.PrimaryKey("PK_Responses", x => x.MovieId);
                     table.ForeignKey(
-                        name: "FK_Responses_Category_CategoryID",
+                        name: "FK_Responses_Categories_CategoryID",
                         column: x => x.CategoryID,
-                        principalTable: "Category",
+                        principalTable: "Categories",
                         principalColumn: "CategoryID",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.InsertData(
-                table: "Category",
+                table: "Categories",
                 columns: new[] { "CategoryID", "CategoryName" },
                 values: new object[] { 1, "Family" });
 
             migrationBuilder.InsertData(
-                table: "Category",
+                table: "Categories",
                 columns: new[] { "CategoryID", "CategoryName" },
                 values: new object[] { 2, "Action/Adventure" });
 
@@ -82,7 +82,7 @@ namespace Mission04_JoelsMovies.Migrations
                 name: "Responses");
 
             migrationBuilder.DropTable(
-                name: "Category");
+                name: "Categories");
         }
     }
 }

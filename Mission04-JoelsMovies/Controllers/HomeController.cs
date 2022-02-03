@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Mission04_JoelsMovies.Models;
 using System;
@@ -36,26 +37,68 @@ namespace Mission04_JoelsMovies.Controllers
         [HttpGet]
         public IActionResult MovieForm()
         {
+            ViewBag.myCategories = daContext.Categories.ToList();
             return View();
         }
         [HttpPost]
         public IActionResult MovieForm(ApplicationResponse ar)
         {
-            daContext.Add(ar);
-            daContext.SaveChanges();
+            if (ModelState.IsValid)
+            {
+                daContext.Add(ar);
+                daContext.SaveChanges();
 
-            return View("Confirmation", ar);
+                return View("Confirmation", ar);
+            }
+            else // if invalid :D
+            {
+                ViewBag.myCategories = daContext.Categories.ToList();
+                return View(ar);
+            }
         }
 
         public IActionResult MovieList()
         {
             var applications = daContext.Responses
-                .OrderBy(x=> x.Category)
-                .OrderBy(x => x.Title)
-                .OrderBy(x => x.Title)
+                .Include(x => x.Category)
+                .OrderBy(x=> x.Category.CategoryName)
+                .ThenBy(x=> x.Title)
                 .ToList();
 
             return View(applications);
+        }
+
+        [HttpGet]
+        public IActionResult Edit (int movieid)
+        {
+            ViewBag.myCategories = daContext.Categories.ToList();
+            var application = daContext.Responses.Single(x => x.MovieId == movieid);
+            
+            return View("MovieForm", application);
+        }
+        [HttpPost]
+        public IActionResult Edit(ApplicationResponse fairy)
+        {
+            daContext.Update(fairy);
+            daContext.SaveChanges();
+
+            return RedirectToAction("MovieList");
+        }
+
+        [HttpGet]
+        public IActionResult Delete(int movieid)
+        {
+            var yadda = daContext.Responses.Single(x => x.MovieId == movieid);
+
+            return View(yadda);
+        }
+
+        [HttpPost]
+        public IActionResult Delete(ApplicationResponse ar)
+        {
+            daContext.Responses.Remove(ar);
+            daContext.SaveChanges();
+            return RedirectToAction("MovieList");
         }
     }
 }
