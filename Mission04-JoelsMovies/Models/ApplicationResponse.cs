@@ -14,9 +14,6 @@ namespace Mission04_JoelsMovies.Models
 
 
         //These fields are all required
-        [Required(ErrorMessage ="Please select movie category")]
-        public string Category { get; set; } 
-
         [Required(ErrorMessage = "Please input movie title")]
         public string Title { get; set; }
 
@@ -28,6 +25,13 @@ namespace Mission04_JoelsMovies.Models
 
         [Required(ErrorMessage = "Please select movie rating")]
         public string Rating { get; set; } //dropdown G, PG, PG-13, R
+
+
+        // Category is a separate table, build foreign key relationship
+        [Required(ErrorMessage = "Please select movie category")]
+        public int CategoryID { get; set; }
+        public Category Category { get; set; }
+
 
         // These fields are optional
         public bool Edited { get; set; } //yes/no option (true/false)

@@ -11,11 +11,11 @@ namespace Mission04_JoelsMovies.Controllers
 {
     public class HomeController : Controller
     {
-        private MovieContext blahContext { get; set; }
+        private MovieContext daContext { get; set; }
 
         public HomeController(MovieContext someName)
         {
-            blahContext = someName;
+            daContext = someName;
         }
 
         public IActionResult Index()
@@ -41,11 +41,21 @@ namespace Mission04_JoelsMovies.Controllers
         [HttpPost]
         public IActionResult MovieForm(ApplicationResponse ar)
         {
-            blahContext.Add(ar);
-            blahContext.SaveChanges();
+            daContext.Add(ar);
+            daContext.SaveChanges();
 
             return View("Confirmation", ar);
         }
 
+        public IActionResult MovieList()
+        {
+            var applications = daContext.Responses
+                .OrderBy(x=> x.Category)
+                .OrderBy(x => x.Title)
+                .OrderBy(x => x.Title)
+                .ToList();
+
+            return View(applications);
+        }
     }
 }
